@@ -1,6 +1,12 @@
 # React + TypeScript + Vite Coisas muito legais que aprendi: Podemos ter esse codigo de uma rota.
 ##Video de como está o projeto:
-https://github.com/user-attachments/assets/0bf4b2ea-cf3b-4982-9628-4b85594598c5
+
+
+
+https://github.com/user-attachments/assets/dc017afe-5815-4911-af3c-0f3ed7b7399a
+
+
+
 ## Como Executar o Projeto
 
 1. Clone o repositório:
