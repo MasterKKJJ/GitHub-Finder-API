@@ -1,50 +1,83 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite Coisas muito legais que aprendi: Podemos ter esse codigo de uma rota.
+##Video de como está o projeto:
+https://github.com/user-attachments/assets/0bf4b2ea-cf3b-4982-9628-4b85594598c5
+## Como Executar o Projeto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   ```
 
-Currently, two official plugins are available:
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+3. Inicie o servidor de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
 
-## Expanding the ESLint configuration
+4. Abra o navegador e acesse:
+   ```
+   http://localhost:5173
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+```javascript
+function Home() {
+  return (
+    <div>
+      <p>Home</p>
+    </div>
+      )
+    }
+export default Home
+```
+teríamos que configurar assim: 
+```javascript
+    import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Home from './routes/Home.tsx'
 
-- Configure the top-level `parserOptions` property like this:
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: '/',
+        element: <Home></Home>,
+        
+      },
+      
+     ]
+  }
+])
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <RouterProvider router={router}></RouterProvider>
+  </StrictMode>,
+)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+para poder usar chamando o Outlet do react-router-dom para poder carregar na tela, você pode usar o componente `Outlet` do `react-router-dom`. Ele deve ser colocado no componente pai (`App` no exemplo acima) onde você deseja que o conteúdo das rotas filhas seja renderizado.
+
+```javascript
+import { Outlet } from 'react-router-dom';
+
+function App() {
+  return (
+    <div>
+      <h1>Meu App</h1>
+      <Outlet /> {/* Aqui o conteúdo da rota filha será renderizado */}
+    </div>
+  );
+}
+
+export default App;
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
